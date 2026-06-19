@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>18.09.2026</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#05070b;
+font-family:Arial, Helvetica, sans-serif;
+color:white;
+overflow:hidden;
+}
+
+body::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at center, rgba(255,255,255,.06), transparent 50%);
+}
+
+.container{
+position:relative;
+text-align:center;
+padding:20px;
+z-index:2;
+}
+
+.date{
+font-size:clamp(2rem,6vw,5rem);
+letter-spacing:.4rem;
+font-weight:300;
+margin-bottom:40px;
+}
+
+.countdown{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.unit{
+min-width:120px;
+padding:15px;
+}
+
+.number{
+font-size:clamp(2rem,5vw,4rem);
+font-weight:700;
+}
+
+.label{
+margin-top:10px;
+font-size:.8rem;
+letter-spacing:.15rem;
+opacity:.6;
+text-transform:uppercase;
+}
+
+.finished{
+font-size:2rem;
+}
+
+footer{
+position:absolute;
+bottom:25px;
+width:100%;
+text-align:center;
+font-size:.8rem;
+opacity:.25;
+letter-spacing:.2rem;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="date">18.09.2026</div>
+
+<div id="countdown" class="countdown">
+
+<div class="unit">
+<div id="days" class="number">0</div>
+<div class="label">Days</div>
+</div>
+
+<div class="unit">
+<div id="hours" class="number">0</div>
+<div class="label">Hours</div>
+</div>
+
+<div class="unit">
+<div id="minutes" class="number">0</div>
+<div class="label">Minutes</div>
+</div>
+
+<div class="unit">
+<div id="seconds" class="number">0</div>
+<div class="label">Seconds</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>COUNTDOWN</footer>
+
+<script>
+
+const targetDate = new Date("2026-09-18T00:00:00+03:00").getTime();
+
+function updateCountdown(){
+
+const now = new Date().getTime();
+const distance = targetDate - now;
+
+if(distance <= 0){
+document.getElementById("countdown").innerHTML =
+'<div class="finished">00:00:00</div>';
+return;
+}
+
+const days = Math.floor(distance / (1000*60*60*24));
+const hours = Math.floor((distance / (1000*60*60)) % 24);
+const minutes = Math.floor((distance / (1000*60)) % 60);
+const seconds = Math.floor((distance / 1000) % 60);
+
+document.getElementById("days").innerText = days;
+document.getElementById("hours").innerText = hours;
+document.getElementById("minutes").innerText = minutes;
+document.getElementById("seconds").innerText = seconds;
+
+}
+
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+</script>
+
+</body>
+</html>
